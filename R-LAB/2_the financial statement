@@ -1,0 +1,41 @@
+# Load necessary libraries
+library(dplyr)
+# Set seed for reproducibility
+set.seed(123)
+# Generate sample data
+months <- c ("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")A
+revenue <- round (runif (12, min = 800, max = 1200), 2) * 1000 # Random monthly revenue
+expenses <- round (runif (12, min = 600, max = 1000), 2) * 1000 # Random monthly expenses
+# Calculate profit for each month
+profit <- revenue - expenses
+# Calculate profit after tax for each month (Tax Rate is 30%)
+tax_rate <- 0.30
+profit_after_tax <- profit * (1 - tax_rate)
+# Calculate profit margin for each month
+profit_margin <- (profit_after_tax / revenue) * 100
+# Calculate mean profit after tax for the year
+mean_profit_after_tax <- mean(profit_after_tax)
+# Identify Good Months, Bad Months, Best Month, and Worst Month
+good_months <- months [profit_after_tax > mean_profit_after_tax]
+bad_months <- months [profit_after_tax < mean_profit_after_tax]
+best_month <- months[which.max(profit_after_tax)]
+worst_month <- months[which.min(profit_after_tax)]
+# Results presentation as vectors with specified precision
+profit <- format (profit / 1000, nsmall = 2)
+profit_after_tax <- format (profit_after_tax / 1000, nsmall = 2)
+profit_margin <- format (profit_margin, nsmall = 0)
+# Create a data frame with the results
+results <- data.frame (
+  Month = months,
+  Profit = paste ("$", profit),
+  Profit_After_Tax = paste ("$", profit_after_tax),
+  Profit_Margin = paste (profit_margin, "%"),
+  Good_Months = paste (good_months, collapse = ", "),
+  Bad_Months = paste (bad_months, collapse = ", "),
+  Best_Month = best_month,
+  Worst_Month = worst_month
+)
+# Save results to a CSV file
+write.csv (results, file = "F:/financial_metrics_results.csv", row.names = FALSE)
+# Display the results
+print(results)
