@@ -24,4 +24,4 @@ print(subtraction_result)
 # d) Multiplication
 multiplication_result <- A %*% B # Matrix multiplication
 cat ("\nMultiplication of Matrix A and Matrix B:\n")
-print(multiplication_result
+print(multiplication_result)
