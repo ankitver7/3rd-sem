@@ -18,3 +18,19 @@ if (num < 0) {
   # Display the result
   cat ("Factorial of", num, "is:", result, "\n")
 }
+
+#or
+
+# Recursive function to calculate factorial
+factorial <- function(n) {
+  if (n == 0 || n == 1) {
+    return(1)
+  } else {
+    return(n * factorial(n - 1))
+  }
+}
+
+# Input: Get a number from the user
+num_input <- 5
+result<-factorial(num_input)
+cat("the factorial of ",num_input,"is",result,"\n")
